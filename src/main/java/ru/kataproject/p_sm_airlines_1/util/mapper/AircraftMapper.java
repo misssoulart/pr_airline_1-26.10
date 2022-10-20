@@ -7,7 +7,7 @@ public class AircraftMapper {
     public static Aircraft dtoToEntity(AircraftDto aircraftDto) {
         return new Aircraft()
                 .setId(aircraftDto.getId())
-                .setPNR(aircraftDto.getPNR())
+                .setOnBoardNumber(aircraftDto.getOnBoardNumber())
                 .setStamp(aircraftDto.getStamp())
                 .setModel(aircraftDto.getModel())
                 .setYearOfRelease(aircraftDto.getYearOfRelease())
@@ -17,7 +17,7 @@ public class AircraftMapper {
     public static AircraftDto entityToDto(Aircraft aircraft) {
         return new AircraftDto()
                 .setId(aircraft.getId())
-                .setPNR(aircraft.getPNR())
+                .setOnBoardNumber(aircraft.getOnBoardNumber())
                 .setStamp(aircraft.getStamp())
                 .setModel(aircraft.getModel())
                 .setYearOfRelease(aircraft.getYearOfRelease())
@@ -29,7 +29,7 @@ public class AircraftMapper {
     long id;
 
     @NotEmpty
-    String PNR;
+    String onBoardNumber;
 
     @NotEmpty
     String stamp;

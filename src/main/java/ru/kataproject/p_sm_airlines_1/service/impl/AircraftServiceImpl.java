@@ -39,7 +39,7 @@ public class AircraftServiceImpl implements AircraftService {
     public void updateAircraft(Aircraft updatedAircraft) {
         Aircraft aircraft = getAircraftById(updatedAircraft.getId());
 
-        aircraft.setPNR(updatedAircraft.getPNR());
+        aircraft.setOnBoardNumber(updatedAircraft.getOnBoardNumber());
         aircraft.setStamp(updatedAircraft.getStamp());
         aircraft.setStamp(updatedAircraft.getStamp());
 
