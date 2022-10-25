@@ -4,6 +4,10 @@ import ru.kataproject.p_sm_airlines_1.entity.Aircraft;
 import ru.kataproject.p_sm_airlines_1.entity.Dto.AircraftDto;
 import java.util.List;
 
+/**
+ * Сервис для работы с Aircraft
+ */
+
 public interface AircraftService {
     List<AircraftDto> getAllAircrafts();
 
