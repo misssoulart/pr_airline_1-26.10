@@ -6,7 +6,6 @@ import ru.kataproject.p_sm_airlines_1.entity.Aircraft;
 import ru.kataproject.p_sm_airlines_1.entity.Dto.AircraftDto;
 import ru.kataproject.p_sm_airlines_1.repository.AircraftRepository;
 import ru.kataproject.p_sm_airlines_1.service.AircraftService;
-import ru.kataproject.p_sm_airlines_1.util.exceptions.AircraftNotFoundException;
 import ru.kataproject.p_sm_airlines_1.util.mapper.AircraftMapper;
 
 import javax.transaction.Transactional;
@@ -48,7 +47,6 @@ public class AircraftServiceImpl implements AircraftService {
         Optional<Aircraft> aircraft = aircraftRepository.findById(id);
         return aircraft.orElseThrow();
     }
-
     @Override
     public void delete(Aircraft aircraft) {
         aircraftRepository.delete(aircraft);
