@@ -11,6 +11,7 @@ import ru.kataproject.p_sm_airlines_1.util.mapper.AircraftMapper;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -28,41 +29,28 @@ public class AircraftServiceImpl implements AircraftService {
                 .stream()
                 .map(AircraftMapper::mapped)
                 .collect(Collectors.toList());
+    }
 
+    @Transactional
+    @Override
+    public void saveAircraft(Aircraft aircraft) {
+        aircraftRepository.save(aircraft);
+    }
+
+    @Transactional
+    @Override
+    public void updateAircraft(Aircraft aircraft) {
+        aircraftRepository.save(aircraft);
     }
 
     @Override
     public Aircraft getAircraftById(Long id) {
-        return aircraftRepository.findById(id)
-                .orElseThrow(() -> new AircraftNotFoundException(id));
-
-    }
-
-    @Override
-    @Transactional
-    public void updateAircraft(Aircraft updatedAircraft) {
-        Aircraft aircraft = getAircraftById(updatedAircraft.getId());
-
-        aircraft.setOnBoardNumber(updatedAircraft.getOnBoardNumber());
-        aircraft.setStamp(updatedAircraft.getStamp());
-        aircraft.setStamp(updatedAircraft.getStamp());
-
-        aircraft.setModel(updatedAircraft.getModel());
-        aircraft.setYearOfRelease(updatedAircraft.getYearOfRelease());
-
-        aircraft.setSeat(updatedAircraft.getSeat());
-        aircraftRepository.save(aircraft);
-    }
-
-    @Override
-    @Transactional
-    public void saveAircraft(Aircraft aircraft) {
-        aircraftRepository.save(aircraft);
+        Optional<Aircraft> aircraft = aircraftRepository.findById(id);
+        return aircraft.orElseThrow();
     }
 
     @Override
     public void delete(Aircraft aircraft) {
         aircraftRepository.delete(aircraft);
     }
-
 }
