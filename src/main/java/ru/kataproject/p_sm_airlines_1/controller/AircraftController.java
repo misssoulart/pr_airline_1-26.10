@@ -10,9 +10,6 @@ import ru.kataproject.p_sm_airlines_1.entity.Dto.AircraftDto;
 
 import java.util.List;
 
-/**
- * Контроллер для обработки запросов по добавлению, изминению и получению данных о воздушном судне
- */
 @Tag(name = "Aircrafts Controller", description = "Operations with aircrafts")
 @RequestMapping(AircraftController.BASE_NAME)
 public interface AircraftController {
@@ -22,7 +19,7 @@ public interface AircraftController {
     /**
      * Метод возвращает список всех оздушных судов из БД. The method returns a list of all aircrafts from DB.
      */
-    @GetMapping()
+    @GetMapping
     @Operation(summary = "Get list of all aircrafts")
     @ApiResponse(responseCode = "200", description = "Page successfully returned")
     ResponseEntity<List<AircraftDto>> getAllAircrafts();
@@ -38,7 +35,6 @@ public interface AircraftController {
 
     /**
      * Метод создаёт новый Data Transfer Object (DTO) aircraft. The method create aircraft.
-     * @return ResponseEntity<AircraftDTO>
      */
     @PostMapping
     @Operation(summary = "Create new aircraft")
@@ -46,7 +42,6 @@ public interface AircraftController {
     @ApiResponse(responseCode = "201", description = "Page successfully returned")
     @ApiResponse(responseCode = "405", description = "Method Not Allowed")
     ResponseEntity<AircraftDto> createAircraft(@RequestBody AircraftDto aircraftDto);
-
 
     /**
      * Метод редактирует информацию о воздушном судне. The method update aircraft information.
@@ -60,7 +55,6 @@ public interface AircraftController {
 
     /**
      * Метод удаляет воздушное судно из базы данных. The method removes the aircraft from the database.
-     * @return ResponseEntity<AircraftDTO>
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)

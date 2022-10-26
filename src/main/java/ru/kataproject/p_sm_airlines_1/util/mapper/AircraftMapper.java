@@ -3,10 +3,6 @@ package ru.kataproject.p_sm_airlines_1.util.mapper;
 import ru.kataproject.p_sm_airlines_1.entity.Aircraft;
 import ru.kataproject.p_sm_airlines_1.entity.Dto.AircraftDto;
 
-/**
- * Преобзарование сущность Aircraft в DTO и обратно
- */
-
 public class AircraftMapper {
     public static Aircraft dtoToEntity(AircraftDto aircraftDto) {
         return new Aircraft()
@@ -28,3 +24,23 @@ public class AircraftMapper {
                 .setSeat(aircraft.getSeat());
     }
 }
+/*
+@Id
+    long id;
+
+    @NotEmpty
+    String onBoardNumber;
+
+    @NotEmpty
+    String stamp;
+
+    @NotEmpty
+    String model;
+
+    @NotEmpty(message = "Year of release should not be empty")
+    @Size(min = 4, max = 4, message = "Year of release must contain 4 characters")
+    int yearOfRelease;
+
+    @NotEmpty
+    long seat;
+ */

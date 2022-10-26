@@ -13,10 +13,6 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
-/**
- * Сервис для работы с бизнеслогикой Aircraft
- */
-
 @Service
 @RequiredArgsConstructor
 public class AircraftServiceImpl implements AircraftService {
