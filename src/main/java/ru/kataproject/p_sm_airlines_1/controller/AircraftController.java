@@ -10,23 +10,24 @@ import ru.kataproject.p_sm_airlines_1.entity.Dto.AircraftDto;
 
 import java.util.List;
 
+/**
+ * Контроллер для обработки запросов по добавлению, изминению и получению данных о воздушном судне
+ */
+
 @Tag(name = "Aircrafts Controller", description = "Operations with aircrafts")
 @RequestMapping(AircraftController.BASE_NAME)
 public interface AircraftController {
     String MAJOR_VERSION = "/v1";
     String BASE_NAME = MAJOR_VERSION + "/aircrafts";
 
-    /**
-     * Метод возвращает список всех оздушных судов из БД. The method returns a list of all aircrafts from DB.
-     */
     @GetMapping
     @Operation(summary = "Get list of all aircrafts")
     @ApiResponse(responseCode = "200", description = "Page successfully returned")
     ResponseEntity<List<AircraftDto>> getAllAircrafts();
 
     /**
-     * Метод возвращает воздушное судно по Id. The method gets/returns a aircraft by Id.
-     */
+    * Получение воздушного судна по ID
+    */
     @GetMapping("/{id}")
     @Operation(summary = "Get aircrafts by id")
     @ApiResponse(responseCode = "200", description = "Page successfully returned")
@@ -34,33 +35,32 @@ public interface AircraftController {
     ResponseEntity<AircraftDto> getAircraftById(@PathVariable Long id);
 
     /**
-     * Метод создаёт новый Data Transfer Object (DTO) aircraft. The method create aircraft.
+     * Метод создания нового воздушного судна
      */
     @PostMapping
     @Operation(summary = "Create new aircraft")
     @ResponseStatus(HttpStatus.CREATED)
     @ApiResponse(responseCode = "201", description = "Page successfully returned")
     @ApiResponse(responseCode = "405", description = "Method Not Allowed")
-    ResponseEntity<AircraftDto> createAircraft(@RequestBody AircraftDto aircraftDto);
+    ResponseEntity<AircraftDto> createAircraft(@RequestBody AircraftDto aircraft);
 
     /**
-     * Метод редактирует информацию о воздушном судне. The method update aircraft information.
+     * Метод изменения данных о воздушном судне
      */
     @PatchMapping
     @Operation(summary = "Update aircraft info")
     @ApiResponse(responseCode = "200", description = "Aircraft Information successfully updated")
     @ApiResponse(responseCode = "404", description = "Page not found")
-    ResponseEntity<AircraftDto> updateAircraft(@RequestBody AircraftDto aircraftDto);
-
+    ResponseEntity<AircraftDto> updateAircraft(@RequestBody AircraftDto aircraft);
 
     /**
-     * Метод удаляет воздушное судно из базы данных. The method removes the aircraft from the database.
+     * Метод удаления данных о воздушном судне
      */
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @Operation(summary = "Delete aircraft")
     @ApiResponse(responseCode = "204", description = "Aircraft successfully removed")
     @ApiResponse(responseCode = "404", description = "Page not found")
-    ResponseEntity<Void> deleteAircraftById(@PathVariable Long id);
+    ResponseEntity<AircraftDto> deleteAircraftById(@PathVariable Long id);
 
 }

@@ -11,6 +11,9 @@ import ru.kataproject.p_sm_airlines_1.util.mapper.AircraftMapper;
 
 import java.util.List;
 
+/**
+ * Контроллер для обработки запросов по добавлению, изминению и получению данных о воздушном судне
+ */
 
 @RestController
 public class AircraftControllerImpl implements AircraftController {
@@ -19,34 +22,47 @@ public class AircraftControllerImpl implements AircraftController {
     public AircraftControllerImpl(AircraftService aircraftService) {
         this.aircraftService = aircraftService;
     }
-
+    /**
+     * Вывод всех Aircraft
+     */
     @Override
     public ResponseEntity<List<AircraftDto>> getAllAircrafts() {
         return new ResponseEntity<>(aircraftService.getAllAircrafts(), HttpStatus.OK);
     }
+    /**
+    * Получение Aircraft по ID
+    */
 
     @Override
     public ResponseEntity<AircraftDto> getAircraftById(Long id) {
-        AircraftDto aircraftDto = AircraftMapper.entityToDto(aircraftService.getAircraftById(id));
-        return new ResponseEntity<>(aircraftDto, HttpStatus.OK);
+        AircraftDto aircraft = AircraftMapper.mapped(aircraftService.getAircraftById(id));
+        return new ResponseEntity<>(aircraft, HttpStatus.OK);
     }
 
+    /**
+     * Создание Aircraft
+     */
     @Override
-    public ResponseEntity<AircraftDto> createAircraft(AircraftDto aircraftDto) {
-        aircraftService.saveAircraft(AircraftMapper.dtoToEntity(aircraftDto));
-        return new ResponseEntity<>(aircraftDto, HttpStatus.CREATED);
+    public ResponseEntity<AircraftDto> createAircraft(AircraftDto aircraft) {
+        aircraftService.saveAircraft(AircraftMapper.mapped(aircraft));
+        return new ResponseEntity<>(aircraft, HttpStatus.OK);
     }
 
+    /**
+     * Обновление данных Aircraft
+     */
     @Override
-    public ResponseEntity<AircraftDto> updateAircraft(AircraftDto aircraftDto) {
-        aircraftService.updateAircraft(AircraftMapper.dtoToEntity(aircraftDto));
-        return new ResponseEntity<>(aircraftDto, HttpStatus.OK);
+    public ResponseEntity<AircraftDto> updateAircraft(AircraftDto aircraft) {
+        aircraftService.updateAircraft(AircraftMapper.mapped(aircraft));
+        return new ResponseEntity<>(aircraft, HttpStatus.OK);
     }
-
+    /**
+     * Удаление данных Aircraft
+     */
     @Override
-    public ResponseEntity<Void> deleteAircraftById(Long id) {
+    public ResponseEntity<AircraftDto> deleteAircraftById(Long id) {
         Aircraft aircraft = aircraftService.getAircraftById(id);
-        aircraftService.deleteAircraftById(aircraft.getId());
-        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        aircraftService.delete(aircraft);
+        return new ResponseEntity<>(AircraftMapper.mapped(aircraft), HttpStatus.OK);
     }
 }

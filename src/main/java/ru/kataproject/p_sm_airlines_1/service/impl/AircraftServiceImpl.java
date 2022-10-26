@@ -13,16 +13,20 @@ import javax.transaction.Transactional;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Сервис для работы с бизнеслогикой Aircraft
+ */
+
 @Service
 @RequiredArgsConstructor
 public class AircraftServiceImpl implements AircraftService {
     private final AircraftRepository aircraftRepository;
-
+    @Transactional
     @Override
     public List<AircraftDto> getAllAircrafts() {
         return aircraftRepository.findAll()
                 .stream()
-                .map(AircraftMapper::entityToDto)
+                .map(AircraftMapper::mapped)
                 .collect(Collectors.toList());
 
     }
@@ -57,8 +61,8 @@ public class AircraftServiceImpl implements AircraftService {
     }
 
     @Override
-    @Transactional
-    public void deleteAircraftById(Long id) {
-        aircraftRepository.delete(getAircraftById(id));
+    public void delete(Aircraft aircraft) {
+        aircraftRepository.delete(aircraft);
     }
+
 }

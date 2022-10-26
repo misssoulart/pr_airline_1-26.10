@@ -3,17 +3,16 @@ package ru.kataproject.p_sm_airlines_1.entity.Dto;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Value;
 import lombok.experimental.Accessors;
 import javax.persistence.Id;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
 /**
- * Data Transfer Object (DTO) for communication with the Aircraft.
- * Describe here the fields that come from the aircraft to the server (and from the server to the aircraft).
- * @Schema - description for front developers (swagger)
+ * DTO для работы с сущностью Aircraft
  */
-
+@Value
 @Getter
 @Setter
 @Accessors(chain = true)
